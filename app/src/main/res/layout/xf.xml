@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:id="@+id/menu"
+	>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="#00BCD4"
+		android:layout_gravity="center">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/ll1">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="INC 1.0"
+				android:textSize="20sp"
+				android:textColor="#000"/>
+
+			<ImageButton
+				android:layout_width="25sp"
+				android:layout_height="25sp"
+				android:layout_gravity="right"
+				android:layout_marginLeft="30sp"
+				android:background="@drawable/image_3"
+				android:id="@+id/Im1"/>
+
+			<ImageButton
+				android:layout_width="25sp"
+				android:layout_height="25sp"
+				android:layout_gravity="right"
+				android:background="@drawable/image_2"
+				android:id="@+id/Im2"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/ll1">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="INCODERS ESP"
+				android:textSize="20sp"
+				android:textColor="#FFFF0000"
+				android:gravity="center"
+				android:singleLine="true"
+				android:ellipsize="marquee"
+				android:focusable="true"
+				android:focusableInTouchMode="true"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_gravity="left">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Perspective"
+				android:textSize="15sp"
+				android:textColor="#000"/>
+
+		</LinearLayout>
+
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Incoders VIP"
+				android:textColor="#FFFF7F00"
+				android:textSize="20sp"/>
+
+			<Switch
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/AppTheme"
+				android:id="@+id/s1"/>
+
+		</LinearLayout>
+		
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Show box"
+				android:textColor="#FFFF7F00"
+				android:textSize="20sp"/>
+			<Switch			
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/AppTheme"
+				android:id="@+id/fk"/>
+		</LinearLayout>
+		
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Display rays"
+				android:textColor="#FFFF7F00"
+				android:textSize="20sp"/>
+
+			<Switch
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/AppTheme"
+				android:id="@+id/sx"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Show Items"
+				android:textColor="#FFFF7F00"
+				android:textSize="20sp"/>
+
+			<Switch
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/AppTheme"
+				android:id="@+id/wp"/>
+
+		</LinearLayout>
+
+
+	</LinearLayout>
+
+</LinearLayout>
+
