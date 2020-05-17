@@ -1,5 +1,6 @@
 package com.example.incodersesp10;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,14 +30,14 @@ import java.net.Socket;
 public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,Runnable
 {
 
-    //用于标注线程是否继续
+    //Used to mark whether the thread continues
     private boolean Flag=true;
 	private ServerSocket server;
 	private Socket socket;
     //SurfaceHolder
     SurfaceHolder surfaceHolder;
 
-    //定义画笔
+    //Define Paint Brush
     Paint paint=new Paint();
     Paint paint1=new Paint();
 	Paint paint2=new Paint();
@@ -114,13 +115,6 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 	}
 
 
-	/**
-     * 根据给定的宽和高进行拉伸
-     *
-     * @param origin 原图
-     * @param scale  缩放比例
-     * @return new Bitmap
-     */
     private Bitmap scaleBitmap(Bitmap origin, float scale) {
         if (origin == null) {
             return null;
@@ -128,15 +122,15 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
         int height = origin.getHeight();
         int width = origin.getWidth();
         Matrix matrix = new Matrix();
-        matrix.postScale(scale, scale);// 使用后乘
+        matrix.postScale(scale, scale);// After USe
         Bitmap newBM = Bitmap.createBitmap(origin, 0, 0, width, height, matrix, false);
         if (!origin.isRecycled()) {
             origin.recycle();
         }
         return newBM;
     }
-	
-	
+
+
 	public static String getFileContent(File file)
 	{
         String content = "";
@@ -145,33 +139,26 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
             try
 			{
                 InputStream instream = new FileInputStream(file);
-                if (instream != null)
+				InputStreamReader inputreader
+					= new InputStreamReader(instream, "UTF-8");
+				BufferedReader buffreader = new BufferedReader(inputreader);
+				String line = "";
+				while ((line = buffreader.readLine()) != null)
 				{
-                    InputStreamReader inputreader
-						= new InputStreamReader(instream, "UTF-8");
-                    BufferedReader buffreader = new BufferedReader(inputreader);
-                    String line = "";
-                    while ((line = buffreader.readLine()) != null)
-					{
-                        content += line;
-                    }
-                    instream.close();//关闭输入流
-                }
-            }
-			catch (FileNotFoundException e)
+					content += line;
+				}
+				instream.close();//Close Input Stream
+			} catch (IOException ignored)
 			{
             }
-			catch (IOException e)
-			{
-            }
-        }
+		}
         return content;
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder)
 	{
-        //初始化画笔
+        //Iinisiale Brush
         init();
         Flag = true;
         new Thread(this).start();
@@ -180,7 +167,7 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 	{
         //paint.setAntiAlias(true);
         paint.setColor(Color.rgb(1, 255, 255));
-        paint.setStyle(Paint.Style.FILL);  //方框背景
+        paint.setStyle(Paint.Style.FILL);  //Square Background
 		paint.setAlpha(50);
 
         //paint.setDither(true);
@@ -188,33 +175,33 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 
         //paint1.setAntiAlias(true);
         paint1.setColor(Color.rgb(255, 255, 255));
-        paint1.setStyle(Paint.Style.STROKE);  //边框
+        paint1.setStyle(Paint.Style.STROKE);  //frame
         paint1.setStrokeWidth(2f);
 
 		//paint1.setDither(true);
 		//paint1.setFilterBitmap(true);
 
         //paint2.setAntiAlias(true);
-        paint2.setColor(Color.rgb(255, 52, 25));  //血条
+        paint2.setColor(Color.rgb(255, 52, 25));  //Blodd Bar
         paint2.setStyle(Paint.Style.FILL);
         paint2.setStrokeWidth(5f);
 		paint2.setAlpha(200);
 
 		//paint3.setAntiAlias(true);
-        paint3.setColor(Color.rgb(255, 255, 255));  //距离
+        paint3.setColor(Color.rgb(255, 255, 255));  //ditance
         paint3.setStyle(Paint.Style.FILL);
         paint3.setStrokeWidth(10f);
 		paint3.setTextSize(25);
 		paint3.setAlpha(255);
 
 		//paint4.setAntiAlias(true);
-        paint4.setColor(Color.rgb(255, 255, 255));  //背敌距离
-        paint4.setStyle(Paint.Style.FILL);      
+        paint4.setColor(Color.rgb(255, 255, 255));  //Back distance
+        paint4.setStyle(Paint.Style.FILL);
 		paint4.setTextSize(25);
 		paint4.setAlpha(205);
 
 		//paint5.setAntiAlias(true);
-        paint5.setColor(Color.rgb(255, 0, 0));  //背敌
+        paint5.setColor(Color.rgb(255, 0, 0));  //Betray
         paint5.setStyle(Paint.Style.FILL);
 		paint5.setTextSize(15);
 		paint5.setAlpha(130);
@@ -231,7 +218,7 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
         Flag = false;
     }
 
-	
+
 	private void wzry(){
 		File file = new File("/sdcard/c.log");
 		if (file == null)
@@ -278,9 +265,10 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 			 canvas.drawBitmap(getBitmapFromPath("/sdcard/Download/hero1/"+id+".png"),0,0,paint1);**/
 		}
 	}
-	
+
+	@SuppressLint("SdCardPath")
 	private void pubg(){
-		
+
 
 		File file = new File("/sdcard/Android/b.txt");
 		if (file == null)
@@ -289,7 +277,6 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 
 		}
 		String fileContent = getFileContent(file);
-		//canvas.drawText( "字符串"+fileContent, 700 , 320+10, paint3);
 		String[] concent = fileContent.split(";");
 			//Get get = new Get(9898);
 
@@ -297,13 +284,11 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 		int rs=0;
 
 		Log.d("/sdcard/Android/log", "run: " + concent.length);
-		for (int i = 0; i < concent.length; i++)
-		{
-			String[] zb = concent[i].split(",");
-			
-			try
-			{
-				lx =Float.parseFloat(zb[0]);
+		for (String s : concent) {
+			String[] zb = s.split(",");
+
+			try {
+				lx = Float.parseFloat(zb[0]);
 				x = Float.parseFloat(zb[1]);
 				y = Float.parseFloat(zb[2]);
 				w = Float.parseFloat(zb[3]);
@@ -311,157 +296,137 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 				M = Float.parseFloat(zb[5]);
 				isbot = Float.parseFloat(zb[6]);
 				hp = Float.parseFloat(zb[7]);
-				ypx=Float.parseFloat(zb[8]);
-				ypy=Float.parseFloat(zb[9]);
-				zsn=Float.parseFloat(zb[10]);
-				yph=Float.parseFloat(zb[11]);
-				mz=Float.parseFloat(zb[12]);
-				wqid=Float.parseFloat(zb[13]);
-				
-				
+				ypx = Float.parseFloat(zb[8]);
+				ypy = Float.parseFloat(zb[9]);
+				zsn = Float.parseFloat(zb[10]);
+				yph = Float.parseFloat(zb[11]);
+				mz = Float.parseFloat(zb[12]);
+				wqid = Float.parseFloat(zb[13]);
+
+
 				//Test.main()
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			int m = (int)M;
-			int Lx=(int)lx;
-			int Zsn=(int)zsn;
+			int m = (int) M;
+			int Lx = (int) lx;
+			int Zsn = (int) zsn;
 			//int Dxzbid=(int)dxzbid;
 
-					//canvas.drawRect(x, y , w, h, paint1);
-					//canvas.drawRect(x, y , w, h, paint);
-					String isrj="人机";
-					if (isbot !=0)
-					{
-						isrj="玩家";
-					}
-					
-					if (mz==1)
-					{
-						isrj=isrj+":被瞄准";
-					}
-					
-					if (hp<=0 && Lx==1)
-					{
-						continue;
-					}
-					
-					
-					
-					if(Lx==1)
-					{
-						
-					if(Zsn==1)
-					{
-						isrj=isrj+"|被遮挡|";
-					}
-					if(wqid!=0)
-					{
-						canvas.drawText(getname((int)wqid),x+h/4,y-25,paint3);
-					}
-					if(kills!=0)
-					{
-						canvas.drawText("杀人数:"+(int)kills,x+h/4,y-50,paint3);
-					}
-					canvas.drawText(isrj+" HP"+(int)hp,x+h/4,y,paint3);
-					
-					canvas.drawText(m+"M",x+h/4,y-h+20,paint3);
-					
-					canvas.drawLine(x-h/4,y,x+h/4,y,paint1);//上横线
-					canvas.drawLine(x-h/4,y-h,x+h/4,y-h,paint1);//下横线
-					canvas.drawLine(x-h/4,y,x-h/4,y-h,paint1);//右竖线
-					canvas.drawLine(x+h/4,y,x+h/4,y-h,paint1);//左竖线
-					
-					canvas.drawLine(2280/2,0,x,y,paint1);//射线
-					
-					
-					canvas.drawText("学技术加群646321560",200,200,paint3);
-					//预判点画出来
-					
-					//canvas.drawText("*",ypx,ypy,paint2);
-					//预判打击点
-					canvas.drawLine(ypx-yph/4,ypy,ypx+yph/4,ypy,paint2);//上横线
-					canvas.drawLine(ypx-yph/4,ypy-yph,ypx+yph/4,ypy-yph,paint2);//下横线
-					canvas.drawLine(ypx-yph/4,ypy,ypx-yph/4,ypy-yph,paint2);//右竖线
-					canvas.drawLine(ypx+yph/4,ypy,ypx+yph/4,ypy-yph,paint2);//左竖线
-					
-					
-					
-					rs=rs+1;
-					}
-					else
-					{
-						canvas.drawText(getname(Lx)+" "+m+"M",x,w,paint3);
-						
-					}
+			//canvas.drawRect(x, y , w, h, paint1);
+			//canvas.drawRect(x, y , w, h, paint);
+			String isrj = "Man-machine";
+			if (isbot != 0) {
+				isrj = "Player";
+			}
+
+			if (mz == 1) {
+				isrj = isrj + ":Be targeted";
+			}
+
+			if (hp <= 0 && Lx == 1) {
+				continue;
+			}
 
 
+			if (Lx == 1) {
 
-					//canvas.drawText( "分割数"+concent, 700 , 300+10, paint3);
+				if (Zsn == 1) {
+					isrj = isrj + "|Blocked|";
+				}
+				if (wqid != 0) {
+					canvas.drawText(getname((int) wqid), x + h / 4, y - 25, paint3);
+				}
+				if (kills != 0) {
+					canvas.drawText("Kills:" + (int) kills, x + h / 4, y - 50, paint3);
+				}
+				canvas.drawText(isrj + " HP" + (int) hp, x + h / 4, y, paint3);
 
-					//canvas.drawLine(x + w + 6, y + h / 2, x + w + 6, y - hp / 100 * w * 2 + h / 2, paint2);
-				
-			
+				canvas.drawText(m + "M", x + h / 4, y - h + 20, paint3);
+
+				canvas.drawLine(x - h / 4, y, x + h / 4, y, paint1);//Upper lIne
+				canvas.drawLine(x - h / 4, y - h, x + h / 4, y - h, paint1);//underline
+				canvas.drawLine(x - h / 4, y, x - h / 4, y - h, paint1);//Right vertical line
+				canvas.drawLine(x + h / 4, y, x + h / 4, y - h, paint1);//Left vertical bar
+
+				canvas.drawLine(2280 / 2, 0, x, y, paint1);//射线
+
+
+				canvas.drawText("MrSPD ", 200, 200, paint3);
+				//Draw out the prediction points
+
+				//canvas.drawText("*",ypx,ypy,paint2);
+				//Anticipate hit point
+				canvas.drawLine(ypx - yph / 4, ypy, ypx + yph / 4, ypy, paint2);//上横线
+				canvas.drawLine(ypx - yph / 4, ypy - yph, ypx + yph / 4, ypy - yph, paint2);//下横线
+				canvas.drawLine(ypx - yph / 4, ypy, ypx - yph / 4, ypy - yph, paint2);//右竖线
+				canvas.drawLine(ypx + yph / 4, ypy, ypx + yph / 4, ypy - yph, paint2);//左竖线
+
+
+				rs = rs + 1;
+			} else {
+				canvas.drawText(getname(Lx) + " " + m + "M", x, w, paint3);
+
+			}
+
+
 		}
-		//canvas.drawText("附近人数:"+rs,1110,900,paint3);
 	}
-	//开始
+	//Assigning IDs for equipments :))))
 	private String getname(int id)
 	{
 		String name="";
 		if (id==10002)
 		{
-			name="[装备]甲Lv2";
+			name="[Equipment] A Lv2";
 		}
 		if (id==10003)
 		{
-			name="[装备]甲Lv3";
+			name="[Equipment] ALv3";
 		}
 		if (id==10102)
 		{
-			name="[装备]盔Lv2";
-		}		
+			name="[Equipment] ALv2";
+		}
 		if (id==10103)
 		{
-			name="[装备]盔Lv3";
-		}				
+			name="[Equipment] helmet Lv3";
+		}
 		if (id==10202)
 		{
-			name="[装备]包Lv2";
-		}				
-		if (id==10203)
-		{
-			name="[装备]包Lv3";
-		}				
-		if (id==10301)
-		{
-			name="[药品]止痛药";
-		}				
-		if (id==10302)
-		{
-			name="[药品]肾上腺素";
-		}		
-		if (id==10303)
-		{
-			name="[药品]能量饮料";
-		}	
-		if (id==10304)
-		{
-			name="[药品]急救包";
-		}	
-		if (id==10305)
-		{
-			name="[药品]电脑";
+			name = "[Equipment] Pack Lv2";
 		}
-		if (id==10701)
+		if (id == 10203)
 		{
-			name="空投";
+			name = "[Equipment] Pack Lv3";
 		}
-		if (id==10702)
+		if (id == 10301)
 		{
-			name="骨灰盒";
+			name = "[drug] painkiller";
+		}
+		if (id == 10302)
+		{
+			name = "[Drug] Adrenaline";
+		}
+		if (id == 10303)
+		{
+			name = "[pharmaceutical] energy drink";
+		}
+		if (id == 10304)
+		{
+			name = "[Drug] First Aid Kit";
+		}
+		if (id == 10305)
+		{
+			name = "[pharmaceutical] computer";
+		}
+		if (id == 10701)
+		{
+			name = "Airdrop";
+		}
+		if (id == 10702)
+		{
+			name = "Bone Ash Box";
 		}
 
 
@@ -470,172 +435,171 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 
 
 
-		
-		if (id==10401)
+		if (id == 10401)
 		{
-			name="[武器-步枪]m416";
-		}		
-		if (id==10402)
-		{
-			name="[武器-步枪]M16";
-		}		
-		if (id==10403)
-		{
-			name="[武器-步枪]SCAR";
-		}		
-		if (id==10404)
-		{
-			name="[武器-步枪]QBZ";
-		}		
-		if (id==10405)
-		{
-			name="[武器-步枪]M762";
-		}			
-		if (id==10406)
-		{
-			name="[武器-步枪]Mk47";
-		}		
-		if (id==10407)
-		{
-			name="[武器-步枪]Groza";
-		}			
-		if (id==10408)
-		{
-			name="[武器-狙击]AWM";
-		}		
-		if (id==10409)
-		{
-			name="[武器-狙击]Kar98k";
-		}		
-		if (id==10410)
-		{
-			name="[武器-狙击]M24";
-		}		
-		if (id==10411)
-		{
-			name="[武器-狙击]Mini14";
-		}		
-		if (id==10412)
-		{
-			name="[武器-狙击]SKS";
-		}		
-		if (id==10413)
-		{
-			name="[武器-狙击]QBU";
-		}		
-		if (id==10414)
-		{
-			name="[武器-冲锋枪]汤姆逊";
-		}		
-		if (id==10415)
-		{
-			name="信号枪";
+			name = "[Weapon-Rifle] m416";
 		}
-		if (id==10501)
+		if (id == 10402)
 		{
-			name="[子弹]556";
-		}				
-		if (id==10502)
-		{
-			name="[子弹]762";
-		}			
-		if (id==10601)
-		{
-			name="[配件]步枪快速扩容";
-		}			
-		if (id==10602)
-		{
-			name="[配件]步枪扩容";
-		}	
-		if (id==10603)
-		{
-			name="[配件]狙击快速扩容";
-		}	
-		if (id==10604)
-		{
-			name="[配件]狙击扩容";
-		}	
-		if (id==10605)
-		{
-			name="[配件]步枪消音";
-		}	
-		if (id==10606)
-		{
-			name="[配件]狙击消音";
+			name = "[Weapon-Rifle] M16";
 		}
-		if (id==10607)
+		if (id == 10403)
 		{
-			name="[倍镜]x4";
+			name = "[Weapon-Rifle] SCAR";
 		}
-		if (id==10608)
+		if (id == 10404)
 		{
-			name="[倍镜]x6";
+			name = "[Weapon-Rifle] QBZ";
 		}
-		if (id==10609)
+		if (id == 10405)
 		{
-			name="[倍镜]x8";
+			name = "[Weapon-Rifle] M762";
 		}
-		if (id==10610)
+		if (id == 10406)
 		{
-			name="小心手雷!!!!!!!!!";
+			name = "[Weapon-Rifle] Mk47";
 		}
-		if (id==10901)
+		if (id == 10407)
 		{
-			name="摩托车";
+			name = "[Weapon-Rifle] Groza";
 		}
-		if (id==10902)
+		if (id == 10408)
 		{
-			name="小绵羊车";
+			name = "[Weapon-Sniper] AWM";
 		}
-		if (id==10903)
+		if (id == 10409)
 		{
-			name="三轮摩托";
+			name = "[Weapon-Sniper] Kar98k";
 		}
-		if (id==10904)
+		if (id == 10410)
 		{
-			name="三轮摩托";
+			name = "[Weapon-Sniper] M24";
 		}
-		if (id==10905)
+		if (id == 10411)
 		{
-			name="蹦蹦";
+			name = "[Weapon-Sniper] Mini14";
 		}
-		if (id==10906)
+		if (id == 10412)
 		{
-			name="跑车";
+			name = "[Weapon-Sniper] SKS";
 		}
-		if (id==10907)
+		if (id == 10413)
 		{
-			name="轿车";
+			name = "[Weapon-Sniper] QBU";
 		}
-		if (id==10908)
+		if (id == 10414)
 		{
-			name="皮卡车";
+			name = "[Weapon-Submachine Gun] Thomson";
 		}
-		if(id==10909)
+		if (id == 10415)
 		{
-			name="货车";
+			name = "Signal Gun";
 		}
-		if(id==10910)
+		if (id == 10501)
 		{
-			name="吉普";
+			name = "[bullet] 556";
 		}
-		if(id==10911)
+		if (id == 10502)
 		{
-			name="快艇";
+			name = "[bullet] 762";
 		}
-	
-		
-		
+		if (id == 10601)
+		{
+			name = "[Accessories] Rifle rapid expansion";
+		}
+		if (id == 10602)
+		{
+			name = "[Accessories] Rifle expansion";
+		}
+		if (id == 10603)
+		{
+			name = "[Accessories] Sniper rapid expansion";
+		}
+		if (id == 10604)
+		{
+			name = "[Accessories] Sniper expansion";
+		}
+		if (id == 10605)
+		{
+			name = "[Accessories] Rifle silencer";
+		}
+		if (id == 10606)
+		{
+			name = "[Accessories] Sniper silencer";
+		}
+		if (id == 10607)
+		{
+			name = "[fold mirror] x4";
+		}
+		if (id == 10608)
+		{
+			name = "[fold mirror] x6";
+		}
+		if (id == 10609)
+		{
+			name = "[fold mirror] x8";
+		}
+		if (id == 10610)
+		{
+			name = "Caution Grenade !!!!!!!!!";
+		}
+		if (id == 10901)
+		{
+			name = "Motorcycle";
+		}
+		if (id == 10902)
+		{
+			name = "Little Sheep Cart";
+		}
+		if (id == 10903)
+		{
+			name = "Tricycle";
+		}
+		if (id == 10904)
+		{
+			name = "Tricycle";
+		}
+		if (id == 10905)
+		{
+			name = "Bungee";
+		}
+		if (id == 10906)
+		{
+			name = "sports car";
+		}
+		if (id == 10907)
+		{
+			name = "Car";
+		}
+		if (id == 10908)
+		{
+			name = "Piggy";
+		}
+		if (id == 10909)
+		{
+			name = "Truck";
+		}
+		if (id == 10910)
+		{
+			name = "Jeep";
+		}
+		if (id == 10911)
+		{
+			name = "Speedboat";
+		}
+
+
+
 		return name;
-		
+
 	}
-	
-	//结束
-	
+
+	//End
+
 	@Override
 	public void run()
-	{        
-	    
+	{
+
 
         while (Flag)
 		{
@@ -648,22 +612,22 @@ public class mSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 			{
                 break;
             }
-			if(Date.getA()=="开启和平"){
-				pubg();
+			if (Date.getA().equals("Turn on peace")) {
+				pubg ();
 			}
-			if(Date.getA()=="显示方框"){
-				//xsfk=1;
+			if (Date.getA().equals("Display box")) {
+// xsfk = 1;
 			}
-			if(Date.getA()=="显示射线"){
-				//xssx=1;
+			if (Date.getA().equals("Display Ray")) {
+// xssx = 1;
 			}
-			if(Date.getA()=="显示物品"){
-				//xswp=1;
+			if (Date.getA () == "Show items") {
+// xswp = 1;
 			}
-			
-			
-			
-			
+
+
+
+
 			surfaceHolder.unlockCanvasAndPost(canvas);
 		}
     }

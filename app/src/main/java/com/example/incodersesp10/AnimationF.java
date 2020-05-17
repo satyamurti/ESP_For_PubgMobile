@@ -10,21 +10,20 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 
 
-/** AnimationTool.java: 悬浮窗按钮动画效果 调用 Setting（）显示隐藏 ----- 2018-6-15 下午5:19:55 wangzhongyuan */
 public class AnimationF
 {
-	View view;
-	int[] ids;
+	private View view;
+	private int[] ids;
 	
 	public AnimationF(View view, int[] R_ids)
 	{
 		this.view = view;
 		ids = R_ids;
 		
-		initSetting(false);	// 初始隐藏
+		initSetting(false);	// Initial hiding
 	}
-	
-	// 设置层叠按钮初始状态 true展开、false层叠
+
+	// Set the initial state of the cascading button true to expand, false to cascade
 	public void initSetting(boolean on)
 	{
 		SettingAniOn = on;
@@ -36,27 +35,25 @@ public class AnimationF
 			view.findViewById(ids[i]).setVisibility(on ? View.VISIBLE : View.INVISIBLE);
 	}
 	
-	// 设置
-	boolean SettingAniOn = true;
-	
-	// 切换层叠按钮状态（层叠、展开）
+	// Set Up
+	private boolean SettingAniOn = true;
+
+	// Switch the state of cascading buttons (cascading, expanding)
 	public void Setting(View view)
 	{
 		settingAni(!SettingAniOn);
 	}
-	
-	// 设置按钮层叠动画效果
+
+	// Set the button cascading animation effect
 	private void settingAni(boolean on)
 	{
 		SettingAniOn = on;
 		final int ANITIME = 300;
-		
-		// 旋转动画
+
 		// View setting = this.findViewById(R.id.setting);
 		View setting = view.findViewById(ids[0]);
 		rotateAni(setting, on, ANITIME);
 		
-		// 位移动画
 		// int[] ids = { R.id.music, R.id.about, R.id.more, R.id.help };
 		// for (int i = 0; i < ids.length; i++)
 		for (int i = 1; i < ids.length; i++)

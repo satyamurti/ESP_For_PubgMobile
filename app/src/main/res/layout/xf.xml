@@ -1,165 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:id="@+id/menu"
-	>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu"
+    android:padding="12dp"
+    android:background="#672196F3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:background="#00BCD4"
-		android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/ll1">
+        android:orientation="vertical">
 
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="INC 1.0"
-				android:textSize="20sp"
-				android:textColor="#000"/>
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="DuplicateIds">
 
-			<ImageButton
-				android:layout_width="25sp"
-				android:layout_height="25sp"
-				android:layout_gravity="right"
-				android:layout_marginLeft="30sp"
-				android:background="@drawable/image_3"
-				android:id="@+id/Im1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/esp_1_0"
+                android:textColor="#000"
+                android:textSize="20sp" />
 
-			<ImageButton
-				android:layout_width="25sp"
-				android:layout_height="25sp"
-				android:layout_gravity="right"
-				android:background="@drawable/image_2"
-				android:id="@+id/Im2"/>
+            <ImageButton
+                android:id="@+id/Im1"
+                android:layout_width="25sp"
+                android:layout_height="25sp"
+                android:layout_gravity="right"
+                android:layout_marginStart="30sp"
+                android:background="@drawable/image_3"
+				tools:ignore="RtlHardcoded" />
 
-		</LinearLayout>
+            <ImageButton
+                android:id="@+id/Im2"
+                android:layout_width="25sp"
+                android:layout_height="25sp"
+                android:layout_gravity="right"
+                android:background="@drawable/image_2"
+				tools:ignore="RtlHardcoded" />
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/ll1">
+        </LinearLayout>
 
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="INCODERS ESP"
-				android:textSize="20sp"
-				android:textColor="#FFFF0000"
-				android:gravity="center"
-				android:singleLine="true"
-				android:ellipsize="marquee"
-				android:focusable="true"
-				android:focusableInTouchMode="true"/>
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-		</LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/mrspd_s_esp"
+                android:textColor="#FFFF0000"
+                android:textSize="20sp" />
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:layout_gravity="left">
+        </LinearLayout>
 
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Perspective"
-				android:textSize="15sp"
-				android:textColor="#000"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:orientation="horizontal"
+			tools:ignore="RtlHardcoded">
 
-		</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perspective"
+                android:textColor="#000"
+                android:textSize="15sp" />
 
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Incoders VIP"
-				android:textColor="#FFFF7F00"
-				android:textSize="20sp"/>
-
-			<Switch
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				style="@style/AppTheme"
-				android:id="@+id/s1"/>
-
-		</LinearLayout>
-		
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Show box"
-				android:textColor="#FFFF7F00"
-				android:textSize="20sp"/>
-			<Switch			
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				style="@style/AppTheme"
-				android:id="@+id/fk"/>
-		</LinearLayout>
-		
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Display rays"
-				android:textColor="#FFFF7F00"
-				android:textSize="20sp"/>
-
-			<Switch
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				style="@style/AppTheme"
-				android:id="@+id/sx"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Show Items"
-				android:textColor="#FFFF7F00"
-				android:textSize="20sp"/>
-
-			<Switch
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				style="@style/AppTheme"
-				android:id="@+id/wp"/>
-
-		</LinearLayout>
+        </LinearLayout>
 
 
-	</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/incoders_vip"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/s1"
+                style="@style/AppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_box"
+                android:textColor="#000"
+
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/fk"
+                style="@style/AppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/display_rays"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/sx"
+                style="@style/AppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_items"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/wp"
+                style="@style/AppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>
 

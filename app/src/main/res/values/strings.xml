@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SPD Esp Hack 1.0</string>
+    <string name="esp_1_0">ESP 1.0</string>
+    <string name="mrspd_s_esp">MrSPD\'s ESP</string>
+    <string name="perspective">Perspective</string>
+    <string name="incoders_vip">ESP VIP</string>
+    <string name="show_box">Show box</string>
+    <string name="display_rays">Display rays</string>
+    <string name="show_items">Show Items</string>
+    <string name="mrspd_esp_1_0">MrSPD ESP 1.0</string>
+    <string name="close">Close</string>
+    <string name="launch">Launch</string>
 </resources>

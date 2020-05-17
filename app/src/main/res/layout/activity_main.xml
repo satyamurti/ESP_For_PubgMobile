@@ -1,38 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:background="@drawable/image_4">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="INCODERS 1.0"
-        android:textColor="#FFF600FF"
-        android:textSize="30sp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/mylogo"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
-    <Button
-        android:id="@+id/b01"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OPEN Floating Window"
-        android:textColor="#FF00FF00"
         android:gravity="center"
-        android:layout_margin="15dp"
-        android:textSize="20sp"
-        android:background="#B0FFFFFF"/>
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close Floating Window"
-        android:textColor="#FF00FF00"
-        android:id="@+id/b02"
-        android:textSize="20sp"
-        android:background="#B0FFFFFF"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/mrspd_esp_1_0"
+            android:textColor="#DBCBDC"
+            android:textSize="30sp" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/b01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/comfortaa_bold"
+            android:gravity="center"
+            android:text="@string/launch"
+            android:textColor="#FF00FF00"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/b02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/close"
+            android:textColor="#FF00FF00"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

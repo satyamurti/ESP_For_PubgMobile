@@ -1,6 +1,7 @@
 package com.example.incodersesp10;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +28,7 @@ import androidx.annotation.RequiresApi;
 import java.io.FileOutputStream;
 public class MainActivity extends Activity implements View.OnClickListener
 {
-    private int mTouchStartX, mTouchStartY;//手指按下时坐标
+    private int mTouchStartX, mTouchStartY;
     private boolean isMove = false;
     private WindowManager mwindow;
     private WindowManager.LayoutParams lparam;
@@ -45,17 +46,15 @@ public class MainActivity extends Activity implements View.OnClickListener
 
     private Button hide;
     private Switch bt1,bt2,bt3,bt4,bt5,bt6,bt7;
-    //七个按钮
+
 
     public boolean bu1=false,bu2=false,bu3=false,bu4=false,bu5=false,bu6=false,bu7=false,fkts=false,xssx=false,xswp=false,xscl=false;
-    //七个按钮状态,全部初始为false
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void CheckFloatViewPermission()
     {
-        if (!Settings.canDrawOverlays(this))//如果不可以绘制悬浮窗
+        if (!Settings.canDrawOverlays(this))
         {
-            Toast.makeText(this,"请开启悬浮窗权限",Toast.LENGTH_LONG).show();
             startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
         }
     }
@@ -64,6 +63,14 @@ public class MainActivity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
         setContentView(R.layout.activity_main);
         CheckFloatViewPermission();
         Button mbutton1=(Button)findViewById(R.id.b01);
@@ -73,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         ExecuteElf("su -c");
 
         //inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater=inflater.from(this);
+        inflater= LayoutInflater.from(this);
         displayMenu=inflater.inflate(R.layout.xf,null);
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -82,37 +89,37 @@ public class MainActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.b01:
-                if (isDisplay == false && isMenuDis == false)
+                if (!isDisplay && !isMenuDis)
                     ShowFloatWindow();
                 //startService(new Intent(this,FloatingService.class));
-                Toast.makeText(MainActivity.this,"开启完毕",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"Service Started",Toast.LENGTH_LONG).show();
                 break;
             case R.id.b02:
-                if (isDisplay == true)
+                if (isDisplay)
                 {
-                    mwindow.removeView(mbutton);//移除悬浮窗
+                    mwindow.removeView(mbutton);
                     isDisplay = false;
-                    if (isMenuDis == true)//如果菜单正在显示
+                    if (isMenuDis)
                     {
-                        mwMenu.removeView(dis);//移除菜单
+                        mwMenu.removeView(dis);
                         isMenuDis = false;
                     }
                 }
                 else
                 {
-                    if (isMenuDis == true)//如果菜单正在显示
+                    if (isMenuDis)
                     {
-                        mwMenu.removeView(dis);//移除菜单
+                        mwMenu.removeView(dis);
                         isMenuDis = false;
                     }
                 }
-                Toast.makeText(this,"关闭成功",Toast.LENGTH_LONG).show();
                 break;
             default:
                 //Toast.makeText(MainActivity.this,v.getId(),Toast.LENGTH_LONG).show();
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void ShowFloatWindow()
     {
@@ -127,7 +134,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         {
             //mbutton=(ImageButton)findViewById(R.id.xf1);
             mbutton=new ImageButton(getApplicationContext());
-            mbutton.setBackgroundResource(R.drawable.image_4);
+            mbutton.setBackgroundResource(R.drawable.menu_icon);
             mbutton.setOnTouchListener(new View.OnTouchListener()
             {
                 @Override
@@ -174,15 +181,13 @@ public class MainActivity extends Activity implements View.OnClickListener
                     isDisplay=false;
                 }
             });
-            //lparam.type=WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
-            //类型
             lparam.format=PixelFormat.RGBA_8888;
             lparam.gravity=Gravity.LEFT;
             lparam.flags=WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
             lparam.width=120;
-            //宽度
+
             lparam.height=120;
-            //高度
+
             if (mparam == null)
             {
                 lparam.x=300;//x
@@ -198,10 +203,11 @@ public class MainActivity extends Activity implements View.OnClickListener
         }
         else
         {
-            Toast.makeText(this,"绘制失败",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"UnSuccesfull",Toast.LENGTH_LONG).show();
         }
     }
 
+    @SuppressLint({"CutPasteId", "ClickableViewAccessibility", "RtlHardcoded"})
     private void LoadMenu()
     {
         mwMenu=(WindowManager)getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
@@ -218,9 +224,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         mparam.gravity=Gravity.LEFT;
         mparam.flags=WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         mparam.width=WindowManager.LayoutParams.WRAP_CONTENT;
-        //宽度
         mparam.height=WindowManager.LayoutParams.WRAP_CONTENT;
-        //高度
         mparam.x=lparam.x;//x
         mparam.y=lparam.y;//y
         mwMenu.addView(dis,mparam);
@@ -234,12 +238,12 @@ public class MainActivity extends Activity implements View.OnClickListener
             {
                 switch (event.getAction())
                 {
-                    case MotionEvent.ACTION_DOWN://单击
+                    case MotionEvent.ACTION_DOWN:
                         isMove = false;
                         mTouchStartX = (int) event.getRawX();
                         mTouchStartY = (int) event.getRawY();
                         break;
-                    case MotionEvent.ACTION_MOVE://拖动
+                    case MotionEvent.ACTION_MOVE:
                         int nowX = (int) event.getRawX();
                         int nowY = (int) event.getRawY();
                         int movedX = nowX - mTouchStartX;
@@ -254,7 +258,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                         lparam.y += movedY;
                         mwindow.updateViewLayout(displayMenu, mparam);
                         break;
-                    case MotionEvent.ACTION_UP://抬起
+                    case MotionEvent.ACTION_UP:
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         break;
@@ -271,11 +275,11 @@ public class MainActivity extends Activity implements View.OnClickListener
             @Override
             public void onClick(View v)
             {
-                //Toast.makeText(MainActivity.this,"on",Toast.LENGTH_LONG).show();
-                ShowFloatWindow();//显示主悬浮窗
 
-                mwMenu.removeView(dis);//移除菜单
-                isMenuDis=false;//菜单状态
+                ShowFloatWindow();
+
+                mwMenu.removeView(dis);
+                isMenuDis=false;
             }
         });
 
@@ -283,49 +287,44 @@ public class MainActivity extends Activity implements View.OnClickListener
             @Override
             public void onClick(View v)
             {
-                if (isDisplay == true)
+                if (isDisplay)
                 {
-                    mwindow.removeView(mbutton);//移除悬浮窗
+                    mwindow.removeView(mbutton);
                     isDisplay = false;
-                    if (isMenuDis == true)//如果菜单正在显示
+                    if (isMenuDis)
                     {
-                        mwMenu.removeView(dis);//移除菜单
+                        mwMenu.removeView(dis);
                         isMenuDis = false;
                     }
                 }
                 else
                 {
-                    if (isMenuDis == true)//如果菜单正在显示
+                    if (isMenuDis)
                     {
-                        mwMenu.removeView(dis);//移除菜单
+                        mwMenu.removeView(dis);
                         isMenuDis = false;
                     }
                 }
             }
         });
 
-        bt1=(Switch)displayMenu.findViewById(R.id.s1);//寻找控件
-        bt2=(Switch)displayMenu.findViewById(R.id.wp);//寻找控件
-        //bt3=(Switch)displayMenu.findViewById(R.id.c);//寻找控件
-        bt4=(Switch)displayMenu.findViewById(R.id.sx);//寻找控件，复制一行
+        bt1=(Switch)displayMenu.findViewById(R.id.s1);
+        bt2=(Switch)displayMenu.findViewById(R.id.wp);
+        bt4=(Switch)displayMenu.findViewById(R.id.sx);
         bt5=(Switch)displayMenu.findViewById(R.id.fk);
 
-        UpdateSwitchButton();//更新按钮状态
+        UpdateSwitchButton();
 
-        bt1.setOnCheckedChangeListener(new onc());//设置选中状态变换监听
-        bt2.setOnCheckedChangeListener(new onc());//设置选中状态变换监听
-        //bt3.setOnCheckedChangeListener(new onc());//设置选中状态变换监听
-        bt4.setOnCheckedChangeListener(new onc());//设置选中状态变换监听，这里也复制一行
+        bt1.setOnCheckedChangeListener(new onc());
+        bt2.setOnCheckedChangeListener(new onc());
+        bt4.setOnCheckedChangeListener(new onc());
         bt5.setOnCheckedChangeListener(new onc());
     }
 
     private void UpdateSwitchButton()
     {
-        //设置按钮状态
-        bt1.setChecked(bu1);
-        //bt2.setChecked(bu2);
 
-        //设置按钮状态
+        bt1.setChecked(bu1);
     }
 
 
@@ -333,11 +332,10 @@ public class MainActivity extends Activity implements View.OnClickListener
 
     private void ExecuteElf(String shell)
     {
-        String s=shell;
 
         try
         {
-            Runtime.getRuntime().exec(s,null,null);//执行
+            Runtime.getRuntime().exec(shell,null,null);
         }
         catch (Exception e)
         {
@@ -363,8 +361,6 @@ public class MainActivity extends Activity implements View.OnClickListener
         @Override
         public void onCheckedChanged(CompoundButton p1, boolean isChecked)
         {
-            //Toast.makeText(MainActivity.this,"touch",Toast.LENGTH_LONG).show();
-            //TODO: Implement this method
             switch (p1.getId())
             {
 
@@ -393,15 +389,15 @@ public class MainActivity extends Activity implements View.OnClickListener
                 case R.id.fk:
                     if(isChecked)
                     {
-                        Date.setA("显示方框");
+                        Date.setA("Show box");
                         FloatService.ShowFloat(MainActivity.this);
-                        Toast.makeText(MainActivity.this,"开启完毕",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Opened",Toast.LENGTH_LONG).show();
                         fkts=true;
                     }
                     else
                     {
                         FloatService.HideFloat();
-                        Toast.makeText(MainActivity.this,"关闭完毕",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Closed",Toast.LENGTH_LONG).show();
                         fkts=false;
                     }
                     break;
@@ -432,7 +428,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                     if (isChecked)
                     {
                         //TODO
-                        Date.setA("显示物品");
+                        Date.setA("Show items");
 
 
                       //  ExecuteElf("su -c /data/nc/nwz");
@@ -440,7 +436,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 
 
                         //TODO
-                        Toast.makeText(MainActivity.this,"开启完毕",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Opened",Toast.LENGTH_LONG).show();
                         xswp=true;
                     }
                     else
@@ -449,7 +445,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                         FloatService.HideFloat();
 
                         //TODO
-                        Toast.makeText(MainActivity.this,"关闭完毕",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Closed",Toast.LENGTH_LONG).show();
                         xswp=false;
                     }
                     break;

@@ -3,9 +3,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
     <com.example.incodersesp10.mSurfaceView
-		
+
 		android:layout_width="match_parent"
-		
 		android:layout_height="match_parent"
 		
 		/>
