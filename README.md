@@ -1,4 +1,9 @@
 # ESP_For_PubgMobile
+[![GitHub license](https://img.shields.io/github/license/satyamurti/ESP_For_PubgMobile)](LICENSE)
+![GitHub license](https://img.shields.io/github/issues/satyamurti/ESP_For_PubgMobile)
+![Github Followers](https://img.shields.io/github/followers/Satyamurti?label=Follow&style=social)
+![GitHub forks](https://img.shields.io/github/stars/satyamurti/ESP_For_PubgMobile?style=social)
+![GitHub forks](https://img.shields.io/github/forks/satyamurti/ESP_For_PubgMobile?style=social)
 
 
 
