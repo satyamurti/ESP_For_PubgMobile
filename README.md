@@ -18,7 +18,7 @@
 
 ## ⚙️ Detailed Functionality
 * ESP for Pubg Mobile works by executing native CPP files with root access 
-* There are 3 types of ESP Avaible to use 🎉
+* There are 3 types of ESP available to use 🎉
 * Show Box : shows boxes around players within 500 metres range
 * Display Rays : displays antena shaped rays from player's head which can be seen within 500 metres range 
 * Show items : shows all equipments arround you with names so you can loot faster and easier than any one else 😉 
